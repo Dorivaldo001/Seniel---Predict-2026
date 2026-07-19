@@ -379,3 +379,35 @@ body.light-theme .moon-icon { display: block; }
     border-top: 1px solid var(--border-color);
     padding-top: 1rem;
 }
+
+
+
+
+
+/* --- OCULTAR BARRAS DE ROLAGEM (Mantendo a funcionalidade) --- */
+
+/* Para navegadores baseados em Chromium (Chrome, Edge, Opera, Safari, etc.) */
+::-webkit-scrollbar {
+    width: 0px;
+    height: 0px;
+    background: transparent; /* Torna a barra totalmente invisível */
+}
+
+/* Para Firefox e padrão atual do ecossistema web */
+html, body {
+    scrollbar-width: none; /* Esconde no Firefox */
+    -ms-overflow-style: none; /* Esconde no antigo Internet Explorer/Edge Legacy */
+}
+
+/* Garante que qualquer container interno com scroll também esconda a barra */
+.tab-panel, #matches-container, #favorites-container {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+.tab-panel::-webkit-scrollbar, 
+#matches-container::-webkit-scrollbar, 
+#favorites-container::-webkit-scrollbar {
+    width: 0px;
+    height: 0px;
+    background: transparent;
+}

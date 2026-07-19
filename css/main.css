@@ -1,0 +1,112 @@
+/* css/main.css */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    -webkit-tap-highlight-color: transparent; /* Remove o flash azul ao tocar em botões no Mobile */
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+body {
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    transition: var(--theme-transition);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden;
+    
+    /* Proteção nativa para telas com entalhes (Notch) */
+    padding-top: env(safe-area-inset-top, 0px);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+/* Restrição inteligente de largura para manter o aspeto de App no Desktop */
+.app-container {
+    width: 100%;
+    max-width: 480px;
+    margin: 0 auto;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--bg-primary);
+    position: relative;
+    box-shadow: 0 0 30px rgba(0,0,0,0.1);
+}
+
+/* --- HEADER FIXO --- */
+.app-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 1.25rem;
+    background-color: var(--bg-secondary);
+    border-bottom: 1px solid var(--border-color);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    transition: var(--theme-transition);
+}
+
+.header-brand h1 {
+    font-size: 1.35rem;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+}
+
+.header-brand .highlight {
+    color: var(--accent-primary);
+}
+
+/* --- ÁREA PRINCIPAL DE CONTEÚDO SCROLLÁVEL --- */
+.app-content {
+    flex: 1;
+    padding: 1rem 1.25rem 5.5rem 1.25rem; /* Margem inferior compensa a barra fixa */
+    overflow-y: auto;
+}
+
+/* --- SISTEMA DE CONTROLO DE ABAS --- */
+.tab-panel {
+    display: none;
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+.tab-panel.active {
+    display: block;
+}
+
+.section-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.25rem;
+}
+
+.section-title h2 {
+    font-size: 1.15rem;
+    font-weight: 700;
+}
+
+.live-badge {
+    background-color: var(--accent-danger);
+    color: #ffffff;
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 0.2rem 0.6rem;
+    border-radius: 20px;
+    text-transform: uppercase;
+    animation: pulse 1.5s infinite;
+}
+
+/* --- ANIMAÇÕES DE SUPORTE --- */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(4px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pulse {
+    0% { opacity: 0.6; }
+    50% { opacity: 1; }
+    100% { opacity: 0.6; }
+}

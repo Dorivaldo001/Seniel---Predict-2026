@@ -1,0 +1,37 @@
+/* css/variables.css */
+
+:root {
+    /* --- TEMA ESCURO (Padrão do App) --- */
+    --bg-primary: #0f172a;       /* Slate 900 - Fundo principal */
+    --bg-secondary: #1e293b;     /* Slate 800 - Fundo de cards e menus */
+    --bg-tertiary: #334155;      /* Slate 700 - Inputs e hover */
+    
+    --text-primary: #f8fafc;     /* Slate 50 - Texto principal */
+    --text-secondary: #94a3b8;   /* Slate 400 - Subtítulos e labels */
+    --border-color: #334155;     /* Linhas divisórias */
+    
+    /* --- CORES DA IDENTIDADE SENIEL DIGITAL --- */
+    --accent-primary: #2563eb;   /* Royal Blue - Tecnologia e Inteligência */
+    --accent-primary-hover: #1d4ed8;
+    --accent-success: #10b981;   /* Emerald 500 - Probabilidade Alta / Vitória */
+    --accent-warning: #f59e0b;   /* Amber 500 - Probabilidade Média / Empate */
+    --accent-danger: #ef4444;    /* Red 500 - Probabilidade Baixa / Derrota */
+
+    /* --- TIMING DE TRANSIÇÃO --- */
+    --theme-transition: background-color 0.3s cubic-bezier(0.4, 0, 0.2, 1), 
+                        color 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+                        border-color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* --- CLASSE APLICADA PARA O TEMA CLARO --- */
+body.light-theme {
+    --bg-primary: #f8fafc;       /* Slate 50 */
+    --bg-secondary: #ffffff;     /* Branco puro */
+    --bg-tertiary: #f1f5f9;      /* Slate 100 */
+    
+    --text-primary: #0f172a;     /* Slate 900 */
+    --text-secondary: #64748b;   /* Slate 500 */
+    --border-color: #e2e8f0;     /* Slate 200 */
+    
+    --accent-primary: #3b82f6;   /* Variante levemente mais vibrante para contraste */
+}

@@ -1,0 +1,381 @@
+/* css/components.css */
+
+
+/* --- ATUALIZAÇÃO DA SPLASH SCREEN --- */
+.splash-logo-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 2rem; /* Espaço entre o logo e a barra de progresso */
+}
+
+.splash-logo {
+    width: 140px;        /* Largura ideal para ecrãs de telemóvel */
+    height: auto;        /* Mantém a proporção original do teu design */
+    object-fit: contain;
+    animation: pulseLogo 2s infinite ease-in-out; /* Efeito suave de respiração no logo */
+}
+
+/* Animação opcional para tornar o carregamento mais dinâmico e moderno */
+@keyframes pulseLogo {
+    0% { transform: scale(1); opacity: 0.9; }
+    50% { transform: scale(1.03); opacity: 1; }
+    100% { transform: scale(1); opacity: 0.9; }
+}
+
+/* --- 1. SPLASH SCREEN & PROGRESS BAR (5 Segundos) --- */
+#splash-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--bg-primary);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.splash-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 70%;
+    max-width: 280px;
+}
+
+.splash-content .app-logo {
+    font-size: 1.85rem;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+    text-align: center;
+}
+
+.splash-content .highlight {
+    color: var(--accent-primary);
+}
+
+.progress-container {
+    width: 100%;
+    height: 4px;
+    background-color: var(--border-color);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.progress-bar-fill {
+    height: 100%;
+    width: 0%;
+    background-color: var(--accent-primary);
+    transition: width 5s linear; /* Controla o tempo exato solicitado */
+}
+
+.splash-hidden {
+    opacity: 0;
+    pointer-events: none;
+    transform: scale(1.02);
+}
+
+/* --- 2. BOTÃO DO TEMA (SUN/MOON TOGGLE) --- */
+.icon-btn {
+    background: none;
+    border: none;
+    color: var(--text-primary);
+    cursor: pointer;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background-color: var(--bg-tertiary);
+    transition: var(--theme-transition);
+}
+
+.icon-btn svg {
+    width: 20px;
+    height: 20px;
+}
+
+/* Controla qual ícone aparece baseado no tema ativo */
+body.dark-theme .sun-icon { display: block; }
+body.dark-theme .moon-icon { display: none; }
+body.light-theme .sun-icon { display: none; }
+body.light-theme .moon-icon { display: block; }
+
+/* --- 3. BARRA DE PESQUISA RÁPIDA --- */
+.search-section {
+    padding: 0.75rem 1.25rem;
+}
+
+.search-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.search-icon {
+    position: absolute;
+    left: 1rem;
+    width: 18px;
+    height: 18px;
+    color: var(--text-secondary);
+    pointer-events: none;
+}
+
+#global-search {
+    width: 100%;
+    padding: 0.75rem 1rem 0.75rem 2.75rem;
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+    background-color: var(--bg-secondary);
+    color: var(--text-primary);
+    font-size: 0.95rem;
+    outline: none;
+    transition: var(--theme-transition);
+}
+
+#global-search:focus {
+    border-color: var(--accent-primary);
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+}
+
+/* --- 4. CARDS DE JOGO & MOTOR DE PROGNÓSTICOS --- */
+.match-card {
+    background-color: var(--bg-secondary);
+    border-radius: 16px;
+    border: 1px solid var(--border-color);
+    padding: 1.25rem;
+    margin-bottom: 1rem;
+    transition: var(--theme-transition);
+}
+
+.match-header {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    margin-bottom: 0.75rem;
+}
+
+.match-teams {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    font-weight: 600;
+    font-size: 1rem;
+    margin-bottom: 1rem;
+}
+
+/* Distribuição de Barras de Probabilidade 1X2 */
+.prediction-bars {
+    display: flex;
+    gap: 0.35rem;
+    height: 24px;
+    border-radius: 6px;
+    overflow: hidden;
+    margin-bottom: 0.75rem;
+}
+
+.bar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: #ffffff;
+    height: 100%;
+}
+
+.bar.home { background-color: var(--accent-success); }
+.bar.draw { background-color: var(--accent-warning); }
+.bar.away { background-color: var(--accent-primary); }
+
+/* Detalhes de Análise */
+.prediction-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.85rem;
+    border-top: 1px solid var(--border-color);
+    padding-top: 0.75rem;
+}
+
+.confidence-badge {
+    padding: 0.2rem 0.5rem;
+    border-radius: 6px;
+    font-weight: 700;
+    font-size: 0.75rem;
+}
+
+.confidence-badge.alto { background-color: rgba(16, 185, 129, 0.15); color: var(--accent-success); }
+.confidence-badge.medio { background-color: rgba(245, 158, 11, 0.15); color: var(--accent-warning); }
+
+/* --- 5. NAVEGAÇÃO INFERIOR FIXA (Estilo Mobile Nativo) --- */
+.bottom-nav {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: var(--bg-secondary);
+    border-top: 1px solid var(--border-color);
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    max-width: 480px;
+    height: 64px;
+    z-index: 100;
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+    transition: var(--theme-transition);
+}
+
+.nav-item {
+    background: none;
+    border: none;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-secondary);
+    gap: 0.25rem;
+    cursor: pointer;
+    height: 100%;
+    transition: color 0.2s ease;
+}
+
+.nav-item svg {
+    width: 22px;
+    height: 22px;
+}
+
+.nav-item span {
+    font-size: 0.7rem;
+    font-weight: 500;
+}
+
+.nav-item.active {
+    color: var(--accent-primary);
+}
+
+/* Placeholder de carregamento */
+.loading-placeholder {
+    text-align: center;
+    color: var(--text-secondary);
+    padding: 3rem 0;
+    font-size: 0.95rem;
+}
+
+
+
+
+
+
+
+
+
+/* --- 6. MODAL DO CRIADOR --- */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(15, 23, 42, 0.6); /* Slate 900 com transparência */
+    backdrop-filter: blur(8px); /* Efeito de desfoque premium */
+    -webkit-backdrop-filter: blur(8px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+.modal-overlay.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.modal-card {
+    background-color: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    width: 90%;
+    max-width: 380px;
+    border-radius: 24px;
+    padding: 2rem;
+    position: relative;
+    transform: scale(0.9);
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3);
+}
+
+.modal-overlay.active .modal-card {
+    transform: scale(1);
+}
+
+.modal-close {
+    position: absolute;
+    top: 1rem;
+    right: 1.25rem;
+    background: none;
+    border: none;
+    color: var(--text-secondary);
+    font-size: 1.75rem;
+    cursor: pointer;
+    line-height: 1;
+}
+
+.creator-profile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin-bottom: 1.25rem;
+}
+
+.creator-avatar {
+    width: 110px;
+    height: 110px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid var(--accent-primary);
+    margin-bottom: 1rem;
+    background-color: var(--bg-tertiary);
+}
+
+.creator-profile h3 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+.creator-title {
+    font-size: 0.85rem;
+    color: var(--accent-primary);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-top: 0.25rem;
+}
+
+.creator-bio {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    line-height: 1.5;
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+
+.creator-footer {
+    text-align: center;
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    border-top: 1px solid var(--border-color);
+    padding-top: 1rem;
+}

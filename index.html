@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+    <meta charset="UTF-8">
+    <!-- viewport-fit=cover permite que o app ocupe a tela toda, incluindo o notch de telemóveis modernos -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>Seniel Predict</title>
+    
+    <!-- Configurações PWA e Barra de Status do Telemóvel -->
+    <meta name="theme-color" content="#0f172a" id="meta-theme-color">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <link rel="manifest" href="manifest.json">
+
+    <!-- CSS Modules -->
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/components.css">
+</head>
+<body class="dark-theme">
+
+
+    <!-- 1. SPLASH SCREEN (Com logotipo oficial e barra de progresso de 5 segundos) -->
+<div id="splash-screen">
+    <div class="splash-content">
+        <!-- Logotipo em Imagem -->
+        <div class="splash-logo-container">
+            <img src="assets/logo.png" alt="Seniel Predict Logo" class="splash-logo" onerror="this.style.display='none'; document.getElementById('fallback-logo').style.display='block';">
+            <!-- Fallback em texto caso a imagem ainda não exista na pasta assets -->
+            <div id="fallback-logo" class="app-logo" style="display: none;">SENIEL<span class="highlight">PREDICT</span></div>
+        </div>
+        
+        <!-- Barra de Progresso -->
+        <div class="progress-container">
+            <div id="progress-bar-fill" class="progress-bar-fill"></div>
+        </div>
+    </div>
+</div>
+
+    <!-- 2. CONTAINER PRINCIPAL (Simula a proporção de um App nativo no Desktop/Mobile) -->
+    <div class="app-container">
+        
+        <!-- HEADER (Fixado no topo, respeitando a barra de status do telemóvel) -->
+        <header class="app-header">
+            <div class="header-brand">
+                <h1>Seniel<span class="highlight">Predict</span></h1>
+            </div>
+
+            <!-- NOVO: Botão do Criador (Info) -->
+            <button id="about-creator-btn" class="icon-btn" aria-label="Sobre o Criador" style="margin-right: 8px;">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+            </button>
+
+
+            <button id="theme-toggle" class="icon-btn" aria-label="Alternar Tema">
+                <!-- Ícone Sol (Light) -->
+                <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+                <!-- Ícone Lua (Dark) -->
+                <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+            </button>
+        </header>
+
+        <!-- BARRA DE PESQUISA RÁPIDA -->
+        <section class="search-section">
+            <div class="search-wrapper">
+                <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+                <input type="text" id="global-search" placeholder="Pesquisar equipa, liga ou data...">
+            </div>
+        </section>
+
+        <!-- CONTEÚDO DINÂMICO (Gerido por js/ui.js) -->
+        <main class="app-content">
+            
+            <!-- ABA 1: JOGOS DO DIA (Ativa por padrão) -->
+            <div id="tab-predictions" class="tab-panel active">
+                <div class="section-title">
+                    <h2>Prognósticos de Hoje</h2>
+                    <span class="live-badge">Ao Vivo</span>
+                </div>
+                <!-- Container onde o js/ui.js injetará os cards dos jogos -->
+                <div id="matches-container" class="list-container">
+                    <div class="loading-placeholder">A carregar jogos...</div>
+                </div>
+            </div>
+
+            <!-- ABA 2: CLASSIFICAÇÕES -->
+            <div id="tab-standings" class="tab-panel">
+                <div class="section-title">
+                    <h2>Classificações</h2>
+                </div>
+                <div id="standings-container" class="list-container">
+                    <!-- Injetado via JS -->
+                </div>
+            </div>
+
+            <!-- ABA 3: FAVORITOS -->
+            <div id="tab-favorites" class="tab-panel">
+                <div class="section-title">
+                    <h2>Os Meus Favoritos</h2>
+                </div>
+                <div id="favorites-container" class="list-container">
+                    <!-- Injetado via JS -->
+                </div>
+            </div>
+
+        </main>
+
+        <!-- 3. NAVEGAÇÃO INFERIOR (Estilo App Nativo Mobile) -->
+        <nav class="bottom-nav">
+            <button class="nav-item active" data-tab="tab-predictions">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m12 3-1.912 5.886H3.894l5.018 3.646L6.999 18.42 12 14.774l5.001 3.645-1.912-5.888 5.017-3.646h-6.194Z"/></svg>
+                <span>Destaques</span>
+            </button>
+            <button class="nav-item" data-tab="tab-standings">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18"/><path d="M18 17V9"/><path d="M13 17V5"/><path d="M8 17v-4"/></svg>
+                <span>Tabelas</span>
+            </button>
+            <button class="nav-item" data-tab="tab-favorites">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+                <span>Favoritos</span>
+            </button>
+        </nav>
+
+    </div>
+
+
+
+
+
+
+
+
+<!-- NOVO: Modal do Criador -->
+<div id="creator-modal" class="modal-overlay">
+    <div class="modal-card">
+        <button id="close-modal-btn" class="modal-close">&times;</button>
+        
+        <div class="creator-profile">
+            <!-- Substitui o src pelo caminho da tua foto real -->
+            <img src="assets/criador.jpg" alt="Foto do Criador" class="creator-avatar" onerror="this.src='https://via.placeholder.com/120'">
+            <h3>Dorivaldo Pinheiro</h3>
+            <p class="creator-title">Desenvolvedor & Analista</p>
+        </div>
+        
+        <div class="creator-bio">
+            <p>Idealizador e desenvolvedor do <strong>Seniel Predict</strong>. Este aplicativo foi criado combinando paixão por dados estatísticos de futebol e engenharia de software frontend moderna.</p>
+        </div>
+        
+        <div class="creator-footer">
+            <span>© 2026 Seniel Digital</span>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    <!-- Módulo JS Principal -->
+    <script type="module" src="js/app.js"></script>
+</body>
+</html>
